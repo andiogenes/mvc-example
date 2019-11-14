@@ -1,6 +1,12 @@
 package structures
 
+/**
+ * Red Black tree implementation.
+ */
 class RedBlackTree<T : Comparable<T>> {
+    /**
+     * Node of tree.
+     */
     data class Node<T>(var key: T,
                        var parent: Node<T>? = null,
                        var leftChild: Node<T>? = null,
@@ -9,10 +15,16 @@ class RedBlackTree<T : Comparable<T>> {
         enum class Color { RED, BLACK }
     }
 
+    /**
+     * Root of tree.
+     */
     var root: Node<T>? = null
         private set
 
-    fun <T> Node<T>?.findGrandparent(): Node<T>? {
+    /**
+     * Finds "grandparent" of receiver node.
+     */
+    private fun <T> Node<T>?.findGrandparent(): Node<T>? {
         if (this == null) return null
 
         if (this.parent == null) return null
@@ -20,7 +32,10 @@ class RedBlackTree<T : Comparable<T>> {
         return this.parent!!.parent
     }
 
-    fun <T> Node<T>?.findUncle(): Node<T>? {
+    /**
+     * finds "uncle" of receiver node.
+     */
+    private fun <T> Node<T>?.findUncle(): Node<T>? {
         val grandpa = this.findGrandparent()
 
         if (grandpa == null) return null
@@ -34,7 +49,10 @@ class RedBlackTree<T : Comparable<T>> {
         return grandpa.leftChild
     }
 
-    fun <T> Node<T>?.findSibling(parent: Node<T>?): Node<T>? {
+    /**
+     * Finds "sibling" of receiver node.
+     */
+    private fun <T> Node<T>?.findSibling(parent: Node<T>?): Node<T>? {
         if (parent == null) return null
 
         if (this == parent.leftChild) return parent.rightChild
@@ -42,7 +60,10 @@ class RedBlackTree<T : Comparable<T>> {
         return parent.leftChild
     }
 
-    val <T> Node<T>?.isRed: Boolean
+    /**
+     * Checks, is receiver "black" or "red".
+     */
+    private val <T> Node<T>?.isRed: Boolean
         get() = if (this == null) false
         else this.color == Node.Color.RED
 
@@ -98,6 +119,9 @@ class RedBlackTree<T : Comparable<T>> {
         x.parent = y
     }
 
+    /**
+     * Inserts item in tree.
+     */
     fun insert(item: T) {
         var current = root
         var previous: Node<T>? = null
@@ -192,6 +216,9 @@ class RedBlackTree<T : Comparable<T>> {
         }
     }
 
+    /**
+     * Removes given node from tree.
+     */
     fun remove(current: Node<T>?): Node<T>? {
         if (current == null) return current
 
@@ -340,6 +367,10 @@ class RedBlackTree<T : Comparable<T>> {
         }
     }
 
+    /**
+     * Finds tree node with minimal value.
+     * @return node with minimal value or null if tree is empty.
+     */
     fun minimum(node: Node<T>? = root): Node<T>? {
         if (node == null) return node
 
@@ -351,6 +382,10 @@ class RedBlackTree<T : Comparable<T>> {
         return current
     }
 
+    /**
+     * Finds tree node with maximal value.
+     * @return node with maximal value or null if tree is empty.
+     */
     fun maximum(node: Node<T>? = root): Node<T>? {
         if (node == null) return node
 
@@ -362,6 +397,9 @@ class RedBlackTree<T : Comparable<T>> {
         return current
     }
 
+    /**
+     * Returns node with previous to given node key by ordering.
+     */
     fun predecessorOf(node: Node<T>?): Node<T>? {
         if (node == null) return node
 
@@ -380,6 +418,9 @@ class RedBlackTree<T : Comparable<T>> {
         return upward
     }
 
+    /**
+     * Returns node with next to given node key by ordering.
+     */
     fun successorOf(node: Node<T>?): Node<T>? {
         if (node == null) return node
 
@@ -398,6 +439,9 @@ class RedBlackTree<T : Comparable<T>> {
         return upward
     }
 
+    /**
+     * Finds node with given key in node.
+     */
     fun find(key: T): Node<T>? {
         var current = root
 
