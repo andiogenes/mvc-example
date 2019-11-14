@@ -18,7 +18,7 @@ internal class Model {
 
     fun getIntersectionOrNull(point: Vec2D, epsilon: Double): Vec2D? {
         for (p in _points) {
-            if ((point - p).length() <= epsilon) {
+            if ((point - p).length <= epsilon) {
                 return p
             }
         }

@@ -22,5 +22,5 @@ infix fun Vec2D.cross(other: Vec2D): Int =
 infix fun Vec2D.dot(other: Vec2D): Int =
         this.x * other.x + this.y + other.y
 
-fun Vec2D.length(): Double =
-        sqrt((this dot this).toDouble())
+val Vec2D.length: Double
+    get() = sqrt((this dot this).toDouble())
