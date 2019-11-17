@@ -60,9 +60,10 @@ internal class View(private val model: Model) {
     private fun drawCoordinates() {
         with(context) {
             fillStyle = "#000"
+            font = "10pt sans-serif"
             for (p in model.points) {
                 val message = "(${p.x}, ${p.y})"
-                fillText(message, p.x.toDouble() - message.length * 2, p.y.toDouble() - 20)
+                fillText(message, p.x.toDouble() - message.length * 2.5, p.y.toDouble() - 20)
 
             }
         }
@@ -70,9 +71,10 @@ internal class View(private val model: Model) {
 
     private fun drawInfo() {
         with(context) {
-            fillStyle = "#000"
+            fillStyle = if (model.isSelfIntersecting) { "#006600" } else { "#000066" }
+            font = "12pt sans-serif"
             val message = if (model.isSelfIntersecting) { "Intersects" } else { "Not intersects" }
-            fillText(message, 10.0, 10.0)
+            fillText(message, 15.0, 25.0)
         }
     }
 
