@@ -21,6 +21,7 @@ internal class Controller(private val model: Model, private val view: View) {
         val intersection = model.getIntersectionOrNull(Vec2D(e.clientX, e.clientY), View.PIVOT_RADIUS)
         if (intersection != null) {
             model.removePoint(intersection)
+            model.checkSegmentIntersection()
         }
     }
 
@@ -35,9 +36,11 @@ internal class Controller(private val model: Model, private val view: View) {
 
     private fun onMouseUp(e: MouseEvent) {
         selected = null
+        model.checkSegmentIntersection()
     }
 
     private fun onDoubleClick(e: MouseEvent) {
         model.addPoint(Vec2D(e.clientX, e.clientY))
+        model.checkSegmentIntersection()
     }
 }

@@ -68,11 +68,20 @@ internal class View(private val model: Model) {
         }
     }
 
+    private fun drawInfo() {
+        with(context) {
+            fillStyle = "#000"
+            val message = if (model.isSelfIntersecting) { "Intersects" } else { "Not intersects" }
+            fillText(message, 10.0, 10.0)
+        }
+    }
+
     private fun draw() {
         clear()
         drawLines()
         drawPivots()
         drawCoordinates()
+        drawInfo()
     }
 
     private fun clear() {
