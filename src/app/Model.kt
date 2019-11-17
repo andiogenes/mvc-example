@@ -44,12 +44,12 @@ internal class Model {
         val markedPoints = segments
                 .flatMap {
                     val segment = if (it.first.x < it.second.x) {
-                        Pair(it.first, it.second)
+                        Segment2D(it.first, it.second)
                     } else {
-                        Pair(it.second, it.first)
+                        Segment2D(it.second, it.first)
                     }
-                    listOf(Triple(segment.first, LEFT, segment),
-                            Triple(segment.second, RIGHT, segment))
+                    listOf(Triple(segment.start, LEFT, segment),
+                            Triple(segment.end, RIGHT, segment))
                 }
 
 
@@ -69,7 +69,7 @@ internal class Model {
         val orderedSet = OrderedSet<Segment2D>()
 
         for (p in sortedPoints) {
-            val segment = Segment2D(p.third.first, p.third.second)
+            val segment = p.third
 
             if (p.second == LEFT) {
                 orderedSet.insert(segment)
