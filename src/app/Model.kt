@@ -36,13 +36,13 @@ internal class Model {
         _selfIntersecting = hasSegmentIntersection()
     }
 
-    fun hasSegmentIntersection(): Boolean {
+    private fun hasSegmentIntersection(): Boolean {
         val LEFT = 0
 
-        val endPoints = prepareEndpoints()
+        val endpoints = prepareEndpoints()
         val orderedSet = OrderedSet<Segment2D>()
 
-        for (p in endPoints) {
+        for (p in endpoints) {
             val segment = p.third
 
             if (p.second == LEFT) {
