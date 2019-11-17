@@ -42,7 +42,15 @@ internal class Model {
 
         val segments = _points.zipWithNext()
         val markedPoints = segments
-                .flatMap { listOf(Triple(it.first, LEFT, it), Triple(it.second, RIGHT, it)) }
+                .flatMap {
+                    val segment = if (it.first.x < it.second.x) {
+                        Pair(it.first, it.second)
+                    } else {
+                        Pair(it.second, it.first)
+                    }
+                    listOf(Triple(segment.first, LEFT, segment),
+                            Triple(segment.second, RIGHT, segment))
+                }
 
 
         val sortedPoints = markedPoints
