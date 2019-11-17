@@ -38,31 +38,8 @@ internal class Model {
 
     fun hasSegmentIntersection(): Boolean {
         val LEFT = 0
-        val RIGHT = 1
 
-        val endPoints = _points
-                .zipWithNext()
-                .flatMap {
-                    val segment = if (it.first.x < it.second.x) {
-                        Segment2D(it.first, it.second)
-                    } else {
-                        Segment2D(it.second, it.first)
-                    }
-                    listOf(Triple(segment.start, LEFT, segment),
-                            Triple(segment.end, RIGHT, segment))
-                }
-                .sortedWith(Comparator { a, b ->
-                    when {
-                        a.first.x < b.first.x -> -1
-                        a.first.x > b.first.x -> 1
-                        a.first.y < b.first.y -> -1
-                        a.first.y > b.first.y -> 1
-                        a.second < b.second -> -1
-                        a.second > b.second -> 1
-                        else -> 0
-                    }
-                })
-
+        val endPoints = prepareEndpoints()
         val orderedSet = OrderedSet<Segment2D>()
 
         for (p in endPoints) {
@@ -94,5 +71,35 @@ internal class Model {
         }
 
         return false
+    }
+
+    private fun prepareEndpoints(): List<Triple<Vec2D, Int, Segment2D>> {
+        val LEFT = 0
+        val RIGHT = 1
+
+        val result = _points
+                .zipWithNext()
+                .flatMap {
+                    val segment = if (it.first.x < it.second.x) {
+                        Segment2D(it.first, it.second)
+                    } else {
+                        Segment2D(it.second, it.first)
+                    }
+                    listOf(Triple(segment.start, LEFT, segment),
+                            Triple(segment.end, RIGHT, segment))
+                }
+                .sortedWith(Comparator { a, b ->
+                    when {
+                        a.first.x < b.first.x -> -1
+                        a.first.x > b.first.x -> 1
+                        a.first.y < b.first.y -> -1
+                        a.first.y > b.first.y -> 1
+                        a.second < b.second -> -1
+                        a.second > b.second -> 1
+                        else -> 0
+                    }
+                })
+
+        return result
     }
 }
