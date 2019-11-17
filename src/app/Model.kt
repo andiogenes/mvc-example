@@ -40,8 +40,8 @@ internal class Model {
         val LEFT = 0
         val RIGHT = 1
 
-        val segments = _points.zipWithNext()
-        val markedPoints = segments
+        val endPoints = _points
+                .zipWithNext()
                 .flatMap {
                     val segment = if (it.first.x < it.second.x) {
                         Segment2D(it.first, it.second)
@@ -51,9 +51,6 @@ internal class Model {
                     listOf(Triple(segment.start, LEFT, segment),
                             Triple(segment.end, RIGHT, segment))
                 }
-
-
-        val sortedPoints = markedPoints
                 .sortedWith(Comparator { a, b ->
                     when {
                         a.first.x < b.first.x -> -1
@@ -68,7 +65,7 @@ internal class Model {
 
         val orderedSet = OrderedSet<Segment2D>()
 
-        for (p in sortedPoints) {
+        for (p in endPoints) {
             val segment = p.third
 
             if (p.second == LEFT) {
