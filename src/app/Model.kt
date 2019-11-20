@@ -9,6 +9,11 @@ internal class Model {
     val points: List<Vec2D>
         get() = _points
 
+    private var _selfIntersecting = false
+
+    val isSelfIntersecting: Boolean
+        get() = _selfIntersecting
+
     fun addPoint(point: Vec2D) {
         _points.add(point)
     }
@@ -26,11 +31,6 @@ internal class Model {
 
         return null
     }
-
-    private var _selfIntersecting = false
-
-    val isSelfIntersecting: Boolean
-        get() = _selfIntersecting
 
     fun checkSegmentIntersection() {
         _selfIntersecting = hasSegmentIntersection()
