@@ -3,25 +3,44 @@ package app
 import math.*
 import structures.OrderedSet
 
+/**
+ * Application data and operations on it.
+ */
 internal class Model {
     private val _points = mutableListOf<Vec2D>()
 
+    /**
+     * Points of multilink broken line.
+     */
     val points: List<Vec2D>
         get() = _points
 
     private var _selfIntersecting = false
 
+    /**
+     * Returns `true` if line is self-intersecting, `false` otherwise.
+     */
     val isSelfIntersecting: Boolean
         get() = _selfIntersecting
 
+    /**
+     * Adds given point to the end of broken line.
+     */
     fun addPoint(point: Vec2D) {
         _points.add(point)
     }
 
+    /**
+     * Remove given point from broken line.
+     */
     fun removePoint(point: Vec2D) {
         _points.remove(point)
     }
 
+    /**
+     * Returns first point that intersects with closed circle
+     * with radius `epsilon`, centered in `point`.
+     */
     fun getIntersectionOrNull(point: Vec2D, epsilon: Double): Vec2D? {
         for (p in _points) {
             if ((point - p).length <= epsilon) {
@@ -32,10 +51,16 @@ internal class Model {
         return null
     }
 
+    /**
+     * Performs intersection check.
+     */
     fun checkSegmentIntersection() {
         _selfIntersecting = hasSegmentIntersection()
     }
 
+    /**
+     * Returns `true` if broken line has intersection, `false` otherwise.
+     */
     private fun hasSegmentIntersection(): Boolean {
         val LEFT = 0
 
@@ -73,6 +98,9 @@ internal class Model {
         return false
     }
 
+    /**
+     * Returns list of points sorted in order needed for sweeping line algorithm.
+     */
     private fun prepareEndpoints(): List<Triple<Vec2D, Int, Segment2D>> {
         val LEFT = 0
         val RIGHT = 1

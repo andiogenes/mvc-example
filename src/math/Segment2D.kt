@@ -1,5 +1,9 @@
 package math
 
+/**
+ * Segment in two-dimensional euclidean space,
+ * which starts in `start` and ends in `end`.
+ */
 data class Segment2D(val start: Vec2D, val end: Vec2D) : Comparable<Segment2D> {
     override fun compareTo(other: Segment2D): Int {
         // TODO: describe comparison
@@ -16,6 +20,10 @@ data class Segment2D(val start: Vec2D, val end: Vec2D) : Comparable<Segment2D> {
     }
 }
 
+/**
+ * Checks intersection between two segments.
+ * Jointed segments are considered as disjointed.
+ */
 infix fun Segment2D.intersectsWith(other: Segment2D): Boolean {
     val d1 = direction(other.start, other.end, start)
     val d2 = direction(other.start, other.end, end)
