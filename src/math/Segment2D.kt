@@ -2,8 +2,9 @@ package math
 
 data class Segment2D(val start: Vec2D, val end: Vec2D) : Comparable<Segment2D> {
     override fun compareTo(other: Segment2D): Int {
-        val turnStart = other.end - start
-        val turnEnd = other.start - start
+        // TODO: describe comparison
+        val turnStart = if (start != other.start) { other.end - start } else { end - start }
+        val turnEnd = if (start != other.start) { other.start - start } else { other.end - start }
 
         val prod = turnStart cross turnEnd
 
