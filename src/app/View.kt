@@ -2,8 +2,9 @@ package app
 
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
-import kotlin.browser.document
-import kotlin.browser.window
+import kotlinx.browser.document
+import kotlinx.browser.window
+import org.w3c.dom.get
 import kotlin.math.PI
 
 internal class View(private val model: Model) {
@@ -17,7 +18,7 @@ internal class View(private val model: Model) {
 
     init {
         window.onload = {
-            document.body?.appendChild(canvas)
+            document.getElementsByTagName("body")[0]?.appendChild(canvas)
             window.requestAnimationFrame { loop() }
         }
     }

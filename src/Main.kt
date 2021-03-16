@@ -17,3 +17,6 @@ fun movePoint(x1: Int, y1: Int, x2: Int, y2: Int) {
 fun removePoint(x: Int, y: Int) {
     app.removePoint(x, y)
 }
+
+@JsName("intersects")
+fun intersects() = app.intersects()

@@ -36,4 +36,9 @@ class App {
         model.removePoint(Vec2D(x, y))
         model.checkSegmentIntersection()
     }
+
+    /**
+     * Checks if there is an self-intersection.
+     */
+    fun intersects(): Boolean = model.isSelfIntersecting
 }
