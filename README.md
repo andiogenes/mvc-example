@@ -5,7 +5,7 @@
 Изначально сделано в качестве лабораторной
 по курсу "Алгоритмы и структуры данных".
 
-Последняя версия доступна на GitHub Pages: [https://tosha-laba.github.io/mvc-example](MVC Example)
+Последняя версия доступна на GitHub Pages: [MVC Example](https://tosha-laba.github.io/mvc-example)
 
 В папке `tests/selenium/ide` лежат UI-тесты для запуска через Selenium WebDriver или Selenium IDE.
 
@@ -20,4 +20,4 @@
 * тест на пересечение сложной ломаной (пятиконечной звезды);
 * тест на __не__пересечение, если при перемещении вершины из пересекающейся ломаной получилась непересекающаяся.
 
-Также есть видео, демонстрирующее прохождение тестов в Selenium IDE: [https://www.youtube.com/watch?v=k4VsZJfdxoM](YouTube)
+Также есть видео, демонстрирующее прохождение тестов в Selenium IDE: [YouTube](https://www.youtube.com/watch?v=k4VsZJfdxoM)
